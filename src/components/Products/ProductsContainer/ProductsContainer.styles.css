@@ -1,0 +1,18 @@
+.welcome_message {
+	background: linear-gradient(135deg, #ffc371, #ff5f6d);
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+}
+
+.welcome_message--header {
+	color: #333;
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.welcome_message--paragraph {
+	color: #666;
+	font-size: 18px;
+	margin-bottom: 0;
+}
