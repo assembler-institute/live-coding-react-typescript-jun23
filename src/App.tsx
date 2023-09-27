@@ -1,16 +1,12 @@
 import "./App.css";
-import {
-	StudentProvider,
-	TeacherProvider,
-	CombinedCreateContext,
-} from "./context/BookContext";
 import BookList from "./components/BookList/BookList";
+import { BookProvider } from "./context/BookContext";
 
 function App() {
 	return (
-		<CombinedCreateContext>
+		<BookProvider>
 			<BookList />
-		</CombinedCreateContext>
+		</BookProvider>
 	);
 }
 

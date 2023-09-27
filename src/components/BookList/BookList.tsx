@@ -1,27 +1,43 @@
 import { useContext } from "react";
-import {
-	StudentContext,
-	TeacherContext,
-	studentContext,
-	teacherContext,
-} from "../../context/BookContext";
+import { BookContext } from "../../context/BookContext";
+import Form from "../Form/Form";
 
-type Props = {};
-
-const BookList = (props: Props) => {
-	// Para acceder necesitamos invocarlo
-	const { amina, ferran } = studentContext();
-
-	const {
-		teacher: { teacher1, teacher2 },
-	} = teacherContext();
+const BookList = () => {
+	const { bookState, handleRemoveBook } = useContext(BookContext);
 
 	return (
 		<>
-			<p>{amina}</p>
-			<p>{ferran}</p>
-			<p>{teacher1} </p>
-			<p>{teacher2}</p>
+			<h2 className="d-flex justify-content-lg-center">
+				Harry Potter Books 🧙‍♀️🪄
+			</h2>
+			<div className="row">
+				<div className="col-7">
+					<h5>List of Books</h5>
+					<ul className="list-group">
+						{bookState &&
+							bookState.map(({ id, title, year }) => (
+								<li
+									key={id}
+									className="list-group-item d-flex justify-content-between"
+								>
+									<span className="align-center">{title}</span>
+									<span className="align-center">{year}</span>
+
+									<button
+										className="btn btn-danger"
+										onClick={() => handleRemoveBook(id)}
+									>
+										Delete book
+									</button>
+								</li>
+							))}
+					</ul>
+				</div>
+				<div className="col-3">
+					<h5>Add my last book</h5>
+					<Form />
+				</div>
+			</div>
 		</>
 	);
 };

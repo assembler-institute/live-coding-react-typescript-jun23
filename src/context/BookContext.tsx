@@ -1,58 +1,33 @@
-import { FC, PropsWithChildren, createContext, useContext } from "react";
+import { FC, PropsWithChildren, createContext, useReducer } from "react";
+import { bookReducer, initialArgs } from "./action";
 
-// Primer paso es crear nuestro contexto. Luego le asignamos un valor
-export const TeacherContext = createContext(undefined);
-export const StudentContext = createContext(undefined);
+export const BookContext = createContext(undefined);
 
-// Segundo paso -> Asignarle valores
-export const StudentProvider: FC<PropsWithChildren> = ({ children }) => {
-	const amina: string = "Amina Seye";
-	const ferran: string = "Ferran Cipres";
+export const BookProvider: FC<PropsWithChildren> = ({ children }) => {
+	// hook useReducer => estado por defecto (param1), información (param2)
+	const [bookState, dispatch] = useReducer(bookReducer, initialArgs);
 
-	return (
-		<StudentContext.Provider value={{ amina, ferran }}>
-			{children}
-		</StudentContext.Provider>
-	);
-};
 
-export const TeacherProvider: FC<PropsWithChildren> = ({ children }) => {
-	const teacher = {
-		teacher1: "Manu",
-		teacher2: "Jose",
+	// Funciones que afectan al reducer
+	const handleNewBook = (newBook) => {
+		dispatch({
+			type: "ADD_BOOK",
+			payload: newBook,
+		});
+	};
+
+	const handleRemoveBook = (id) => {
+		dispatch({
+			type: "REMOVE_BOOK",
+			payload: id,
+		});
 	};
 
 	return (
-		<TeacherContext.Provider value={{ teacher }}>
+		<BookContext.Provider
+			value={{ bookState, handleNewBook, handleRemoveBook }}
+		>
 			{children}
-		</TeacherContext.Provider>
+		</BookContext.Provider>
 	);
 };
-
-export const CombinedCreateContext = ({ children }) => {
-	return (
-		<>
-			<StudentProvider>
-				<TeacherProvider>{children}</TeacherProvider>
-			</StudentProvider>
-		</>
-	);
-};
-
-export function studentContext() {
-	const context = useContext(StudentContext);
-
-	if (context === undefined || null)
-		throw new Error("The context is undefined");
-
-	return context;
-}
-
-export function teacherContext() {
-	const context = useContext(TeacherContext);
-
-	if (context === undefined || null)
-		throw new Error("The context is undefined");
-
-	return context;
-}
