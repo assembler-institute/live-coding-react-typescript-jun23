@@ -1,14 +1,16 @@
 import "./App.css";
-import { RouterPaths } from "./Routes/RouterPaths.routes";
-import { UserProvider } from "./context/UserProvider";
+import {
+	StudentProvider,
+	TeacherProvider,
+	CombinedCreateContext,
+} from "./context/BookContext";
+import BookList from "./components/BookList/BookList";
 
-function App(props: any) {
+function App() {
 	return (
-		<>
-			<UserProvider {...props}>
-				<RouterPaths {...props} />
-			</UserProvider>
-		</>
+		<CombinedCreateContext>
+			<BookList />
+		</CombinedCreateContext>
 	);
 }
 
