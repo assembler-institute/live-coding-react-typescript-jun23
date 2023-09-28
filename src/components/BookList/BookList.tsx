@@ -1,9 +1,15 @@
-import { useContext } from "react";
-import { BookContext } from "../../context/BookContext";
+import { useContext, FC } from "react";
+import { BookContext, bookContext } from "../../context/BookContext";
 import Form from "../Form/Form";
 
-const BookList = () => {
-	const { bookState, handleRemoveBook } = useContext(BookContext);
+type BookType = {
+	id: string;
+	title: string;
+	year: string;
+};
+
+const BookList: FC = () => {
+	const { bookState, handleRemoveBook } = bookContext();
 
 	return (
 		<>
@@ -15,7 +21,7 @@ const BookList = () => {
 					<h5>List of Books</h5>
 					<ul className="list-group">
 						{bookState &&
-							bookState.map(({ id, title, year }) => (
+							bookState.map(({ id, title, year }: BookType) => (
 								<li
 									key={id}
 									className="list-group-item d-flex justify-content-between"

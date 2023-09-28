@@ -1,8 +1,19 @@
-import React, { useContext, useState } from "react";
-import { BookContext } from "../../context/BookContext";
+import { FC, useContext, useState, ChangeEvent } from "react";
+import { BookContext, bookContext } from "../../context/BookContext";
+import { FormEvent } from "react";
 
-const Form = () => {
-	const { handleNewBook } = useContext(BookContext);
+type BookType = {
+	id: string;
+	title: string;
+	year: string;
+};
+
+type NewBookProps = {
+	handleNewBook: (book: BookType) => void;
+};
+
+const Form: FC = () => {
+	const { handleNewBook } = useContext(BookContext) as NewBookProps;
 
 	const [formState, setFormState] = useState({
 		id: "",
@@ -12,7 +23,7 @@ const Form = () => {
 
 	const { id, title, year } = formState;
 
-	const handleChange = ({ target }: any) => {
+	const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = target;
 		setFormState({
 			...formState,
@@ -20,9 +31,12 @@ const Form = () => {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (!id || !title || !year) "There is a filed missing";
+		if (!id || !title || !year) {
+			console.log("There is a filed missing");
+			return;
+		}
 
 		const newBook = {
 			id,

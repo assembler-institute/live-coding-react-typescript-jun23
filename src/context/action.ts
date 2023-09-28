@@ -1,4 +1,11 @@
-export const initialArgs = [
+type BookType = {
+	id: string,
+	title: string,
+	year: string
+}
+
+
+export const initialArgs: BookType[] = [
 	{
 		id: "1",
 		title: "La piedra filosofal 💎",
@@ -36,13 +43,14 @@ export const initialArgs = [
 	},
 ];
 
-type BookTypeProps = {
-  id: string,
-  title: string,
-  year: string
-}
 
-export const bookReducer = (state: typeof initialArgs, action: BookTypeProps) => {
+// union types
+
+type BookActionType = 
+| { type: 'ADD_BOOK'; payload: BookType }
+| { type: 'REMOVE_BOOK'; payload: string }
+
+export const bookReducer = (state: typeof initialArgs, action: BookActionType) => {
 
   switch(action.type) {
 		case 'ADD_BOOK':
