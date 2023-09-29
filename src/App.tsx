@@ -1,12 +1,13 @@
 import "./App.css";
-import BookList from "./components/BookList/BookList";
-import { BookProvider } from "./context/BookContext";
+import GetGiphys from "./components/GetGiphys/GetGiphys";
+import GetProducts from "./components/GetProducts";
 
 function App() {
 	return (
-		<BookProvider>
-			<BookList />
-		</BookProvider>
+		<>
+			{/* <GetGiphys /> */}
+			<GetProducts />
+		</>
 	);
 }
 
