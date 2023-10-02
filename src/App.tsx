@@ -1,14 +1,8 @@
 import "./App.css";
-import GetGiphys from "./components/GetGiphys/GetGiphys";
-import GetProducts from "./components/GetProducts";
+import WebRoutes from "./routes/WebRoutes.routes";
 
 function App() {
-	return (
-		<>
-			{/* <GetGiphys /> */}
-			<GetProducts />
-		</>
-	);
+	return <WebRoutes />;
 }
 
 export default App;
