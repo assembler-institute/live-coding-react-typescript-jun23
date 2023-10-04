@@ -4,11 +4,12 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { HeroesApp } from './HeroesApp';
 import './styles.css';
+import AuthProvider from './auth/context/AuthProvider';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
+    <AuthProvider>
       <HeroesApp />
-    </BrowserRouter>
-  </React.StrictMode>
+    </AuthProvider>
+  </BrowserRouter>
 );
