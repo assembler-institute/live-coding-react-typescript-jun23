@@ -1,15 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./main.css";
+import App from "./App";
 
-import { HeroesApp } from './HeroesApp';
-import './styles.css';
-import AuthProvider from './auth/context/AuthProvider';
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <AuthProvider>
-      <HeroesApp />
-    </AuthProvider>
-  </BrowserRouter>
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+	<React.StrictMode>
+		<App />
+	</React.StrictMode>
 );
