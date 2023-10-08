@@ -1,28 +1,20 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Header } from "../../Header/Header";
+import useForm from "../../../hooks/useForm";
 
 let renderedCount = 0;
 
 export const WithouthReactHookForm: FC = () => {
 	renderedCount++;
 
-	const [formState, setFormState] = useState({
+	const { formState, handleSubmit, handleChange } = useForm({
 		username: "",
 		password: "",
 		age: 0,
+		country: "",
 	});
 
-	const { username, password, age } = formState;
-
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		console.log("formState", formState);
-	};
-
-	const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = target;
-		setFormState({ ...formState, [name]: value });
-	};
+	const { username, password, age, country } = formState;
 
 	return (
 		<>
@@ -47,6 +39,13 @@ export const WithouthReactHookForm: FC = () => {
 					type="number"
 					name="age"
 					value={age}
+					onChange={handleChange}
+					placeholder="Age"
+				/>
+				<input
+					type="number"
+					name="country"
+					value={country}
 					onChange={handleChange}
 					placeholder="Age"
 				/>
